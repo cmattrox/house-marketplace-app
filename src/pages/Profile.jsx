@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { getAuth, updateProfile } from 'firebase/auth';
+import { getAuth, updateProfile, updateEmail } from 'firebase/auth';
 import {
 	updateDoc,
 	doc,
@@ -67,16 +67,48 @@ function Profile() {
 
 	const onSubmit = async () => {
 		try {
-			if (auth.currentUser.displayName !== name) {
-				// Update display name in fb
-				await updateProfile(auth.currentUser, {
-					displayName: name,
-				});
+			if (
+				auth.currentUser.displayName !== name ||
+				auth.currentUser.email !== email
+			) {
+				if (auth.currentUser.displayName !== name) {
+					// Update display name in fb
+					await updateProfile(auth.currentUser, {
+						displayName: name,
+						email: email,
+					})
+						.then(() => {
+							toast.success(
+								'User profile name has been changed successfully'
+							);
+						})
+						.catch((error) => {
+							toast.error(
+								'User profile name could not be updated'
+							);
+						});
+				}
+
+				if (auth.currentUser.email !== email) {
+					await updateEmail(auth.currentUser, email)
+						.then(() => {
+							toast.success(
+								'User profile email has been changed successfully'
+							);
+						})
+						.catch((error) => {
+							console.log(error);
+							toast.error(
+								'User profile email could not be updated'
+							);
+						});
+				}
 
 				// Update in firestore
 				const userRef = doc(db, 'users', auth.currentUser.uid);
 				await updateDoc(userRef, {
 					name,
+					email,
 				});
 			}
 		} catch (error) {
@@ -125,7 +157,7 @@ function Profile() {
 							setChangeDetails((prevState) => !prevState);
 						}}
 					>
-						{changeDetails ? 'done' : 'change'}
+						{changeDetails ? 'Done' : 'Change'}
 					</p>
 				</div>
 				<div className="profileCard">

@@ -69,12 +69,11 @@ function EditListing() {
 		const fetchListing = async () => {
 			const docRef = doc(db, 'listings', params.listingId);
 			const docSnap = await getDoc(docRef);
-
 			if (docSnap.exists()) {
 				setListing(docSnap.data());
 				setFormData({
 					...docSnap.data(),
-					address: docSnap.data.location,
+					address: docSnap.data().location,
 				});
 				setLoading(false);
 			} else {
@@ -101,7 +100,7 @@ function EditListing() {
 		return () => {
 			isMounted.current = false;
 		};
-		// esling-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line
 	}, [isMounted, auth, formData, navigate]);
 
 	const onSubmit = async (e) => {
