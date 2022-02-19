@@ -21,7 +21,9 @@ function App() {
 			<Router>
 				<Routes>
 					<Route path="/" element={<Explore />} />
-					<Route path="/offers" element={<Offers />} />
+					<Route path="/offers" element={<PrivateRoute />}>
+						<Route path="/offers" element={<Offers />} />
+					</Route>
 					<Route
 						path="/category/:categoryName"
 						element={<Category />}
