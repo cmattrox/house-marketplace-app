@@ -11,6 +11,7 @@
 		@apply hidden;
 	}
 
+	html,
 	body {
 		@apply bg-gray-300 w-full h-full m-0 box-border relative overflow-auto;
 	}
@@ -71,7 +72,7 @@
 	}
 
 	.navbar {
-		@apply relative left-0 bottom-0 right-0 bg-white z-40 flex justify-center items-center h-24 border-t-2 border-gray-300;
+		@apply fixed left-0 bottom-0 right-0 bg-white z-50 flex justify-center items-center h-24 border-t-2 border-gray-300;
 	}
 
 	.pageHeader {
@@ -79,24 +80,24 @@
 	}
 
 	.navbarNav {
-		@apply w-full mt-3;
+		@apply w-full mt-3 z-50;
 	}
 
 	.navbarListItems {
-		@apply m-0 p-0 flex justify-evenly items-center;
+		@apply m-0 p-0 flex z-50 justify-evenly items-center;
 	}
 
 	.navbarListItem {
-		@apply cursor-pointer flex flex-col items-center;
+		@apply cursor-pointer z-50 flex flex-col items-center;
 	}
 
 	.navbarListItemName,
 	.navbarListItemNameActive {
-		@apply mt-1 text-sm font-semibold text-gray-500;
+		@apply mt-1 text-sm z-50 font-semibold text-gray-500;
 	}
 
 	.navbarListItemNameActive {
-		@apply text-teal-400;
+		@apply text-teal-400 z-50;
 	}
 
 	.passwordInputDiv {
@@ -211,7 +212,7 @@
 	}
 
 	.categoryListingImg {
-		@apply w-1/3 h-6 rounded-2xl object-cover;
+		@apply w-1/3 h-full rounded-2xl object-cover;
 	}
 
 	.categoryListingDetails {
@@ -279,7 +280,7 @@
 	}
 
 	.leafletContainer {
-		@apply w-full h-48 overflow-x-hidden mb-40 z-50;
+		@apply w-full h-48 overflow-x-hidden mb-40 z-10;
 	}
 
 	.linkCopied {
