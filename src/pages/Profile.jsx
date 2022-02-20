@@ -148,7 +148,7 @@ function Profile() {
 			</header>
 
 			<main>
-				<div className="profileDetailsHeader">
+				<div className="profileDetailsHeader flex justify-between mt-5">
 					<p className="profileDetailsText">Personal Details</p>
 					<p
 						className="changePersonalDetails"
@@ -168,7 +168,7 @@ function Profile() {
 							className={
 								!changeDetails
 									? 'profileName'
-									: 'profileNameActive'
+									: 'profileNameActive bg-gray-300'
 							}
 							disabled={!changeDetails}
 							value={name}
@@ -189,7 +189,7 @@ function Profile() {
 					</form>
 				</div>
 
-				<Link to="/create-listing" className="createListing">
+				<Link to="/create-listing" className="createListing py-5">
 					<img src={homeIcon} alt="Home" />
 					<p>Sell or rent your home</p>
 					<img src={arrowRight} alt="arrow right" />

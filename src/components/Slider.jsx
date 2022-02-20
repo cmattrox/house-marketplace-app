@@ -68,7 +68,7 @@ function Slider() {
 									background: `url(${data.imgUrls[0]}) center no-repeat`,
 									backgroundSize: 'cover',
 								}}
-								className="swiperSlideDiv"
+								className="swiperSlideDiv rounded-lg"
 							>
 								<p className="swiperSlideText">{data.name}</p>
 								<p className="swiperSlidePrice">

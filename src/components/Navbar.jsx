@@ -24,7 +24,7 @@ function Navbar() {
 						<OfferIcon
 							fill={
 								pathMatchRoute('/offers')
-									? '#2c2c2c'
+									? '#2dd4be'
 									: '#8f8f8f'
 							}
 							width="36px"
@@ -45,7 +45,7 @@ function Navbar() {
 						onClick={() => navigate('/')}
 					>
 						<ExploreIcon
-							fill={pathMatchRoute('/') ? '#2c2c2c' : '#8f8f8f'}
+							fill={pathMatchRoute('/') ? '#2dd4be' : '#8f8f8f'}
 							width="36px"
 							height="36px"
 						/>
@@ -66,7 +66,7 @@ function Navbar() {
 						<PersonOutlineIcon
 							fill={
 								pathMatchRoute('/profile')
-									? '#2c2c2c'
+									? '#2dd4be'
 									: '#8f8f8f'
 							}
 							width="36px"

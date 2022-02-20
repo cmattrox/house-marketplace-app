@@ -6,7 +6,7 @@ import bathtubIcon from '../assets/svg/bathtubIcon.svg';
 
 function ListingItem({ listing, id, onEdit, onDelete }) {
 	return (
-		<li className="categoryListing">
+		<li className="categoryListing bg-white rounded-2xl shadow-lg border-2 border-gray-300">
 			<Link
 				to={`/category/${listing.type}/${id}`}
 				className="categoryListingLink"
@@ -14,7 +14,7 @@ function ListingItem({ listing, id, onEdit, onDelete }) {
 				<img
 					src={listing.imgUrls[0]}
 					alt={listing.name}
-					className="categoryListingImg"
+					className="categoryListingImg border-r-2 border-gray-200"
 				/>
 
 				<div className="categoryListingDetails">

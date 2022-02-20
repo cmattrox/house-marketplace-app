@@ -2,31 +2,464 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
-* {
-	box-sizing: border-box;
+@layer base {
+	* {
+		@apply box-border;
+	}
+
+	html::-webkit-scrollbar {
+		@apply hidden;
+	}
+
+	body {
+		@apply bg-gray-300 w-full h-full m-0 box-border relative overflow-auto;
+	}
+
+	a {
+		@apply no-underline block text-black;
+	}
+
+	button {
+		@apply outline-none border-none;
+	}
 }
 
-html::-webkit-scrollbar {
-	display: none;
+@layer components {
+	#root {
+		@apply h-full w-full;
+	}
+
+	.input,
+	.passwordInput,
+	.emailInput,
+	.nameInput,
+	.textarea {
+		@apply border-none shadow-lg border-none bg-white rounded h-12 w-full outline-none px-12 text-base;
+	}
+
+	.textarea {
+		@apply py-4 px-6 h-72 rounded-2xl;
+	}
+
+	.primaryButton {
+		@apply cursor-pointer bg-teal-400 rounded-2xl py-5 font-semibold text-xl w-4/5 mx-auto flex items-center justify-center;
+	}
+
+	.removeIcon {
+		@apply cursor-pointer absolute top-2 right-3;
+	}
+
+	.editIcon {
+		@apply cursor-pointer absolute top-2 right-10;
+	}
+
+	.pageContainer,
+	.offers,
+	.profile,
+	.listingDetails,
+	.category,
+	.explore {
+		@apply m-4;
+	}
+
+	.loadingSpinnerContainer {
+		@apply fixed top-0 right-0 bottom-0 left-0 bg-black opacity-50 z-50 flex justify-center items-center;
+	}
+
+	.loadingSpinner {
+		@apply w-16 h-16 border-2 border-solid border-teal-400 rounded-full animate-spin;
+	}
+
+	.navbar {
+		@apply relative left-0 bottom-0 right-0 bg-white z-40 flex justify-center items-center h-24 border-t-2 border-gray-300;
+	}
+
+	.pageHeader {
+		@apply text-4xl font-extrabold;
+	}
+
+	.navbarNav {
+		@apply w-full mt-3;
+	}
+
+	.navbarListItems {
+		@apply m-0 p-0 flex justify-evenly items-center;
+	}
+
+	.navbarListItem {
+		@apply cursor-pointer flex flex-col items-center;
+	}
+
+	.navbarListItemName,
+	.navbarListItemNameActive {
+		@apply mt-1 text-sm font-semibold text-gray-500;
+	}
+
+	.navbarListItemNameActive {
+		@apply text-teal-400;
+	}
+
+	.passwordInputDiv {
+		@apply relative;
+	}
+
+	.showPassword {
+		@apply cursor-pointer absolute -top-1 right-1 p-4;
+	}
+
+	.forgotPasswordLink {
+		@apply cursor-pointer text-teal-400 font-semibold text-right;
+	}
+
+	.signInBar,
+	.signUpBar {
+		@apply mt-12 flex justify-between items-center;
+	}
+
+	.signInButton,
+	.signUpButton,
+	.signInText,
+	.signUpText {
+		@apply cursor-pointer;
+	}
+
+	.signInText,
+	.signUpText {
+		@apply text-2xl font-bold;
+	}
+
+	.signInButton,
+	.signUpButton {
+		@apply flex justify-center items-center w-12 h-12 bg-teal-400 rounded-full;
+	}
+
+	.socialLogin {
+		@apply mt-16 flex flex-col items-center;
+	}
+
+	.socialIconDiv {
+		@apply cursor-pointer flex justify-center items-center p-3 m-6 w-12 h-12 bg-white rounded-full shadow-lg;
+	}
+
+	.socialIconImg {
+		@apply w-full;
+	}
+
+	.registerLink {
+		@apply mt-16 text-teal-400 font-semibold text-center mb-12;
+	}
+
+	.exploreHeading,
+	.exploreCategoryHeading {
+		@apply font-bold;
+	}
+
+	.exploreCategoryHeading {
+		@apply mt-12;
+	}
+
+	.swiper-pagination-bullet-active {
+		@apply !bg-white;
+	}
+
+	.swiperSlideDiv {
+		@apply relative w-full h-full;
+	}
+
+	.swiperSlideImg {
+		@apply w-full object-cover;
+	}
+
+	.swiperSlideText {
+		@apply text-white absolute top-4 left-0 font-semibold max-w-full text-lg bg-black opacity-80 p-2 rounded-r-lg;
+	}
+
+	.swiperSlidePrice {
+		@apply text-black absolute bottom-9 left-1 font-semibold max-w-full bg-white py-1 px-2 rounded-2xl;
+	}
+
+	.exploreCategories {
+		@apply flex;
+	}
+
+	.exploreCategories a {
+		@apply w-1/2;
+	}
+
+	.exploreCategoryImg {
+		@apply w-full rounded-2xl object-cover px-2;
+	}
+
+	.exploreCategoryName {
+		@apply font-medium text-left;
+	}
+
+	.category {
+		@apply mb-40;
+	}
+
+	.categoryListings {
+		@apply p-0;
+	}
+
+	.categoryListing {
+		@apply flex justify-between items-center mb-4 relative;
+	}
+
+	.categoryListingLink {
+		@apply contents;
+	}
+
+	.categoryListingImg {
+		@apply w-1/3 h-6 rounded-2xl object-cover;
+	}
+
+	.categoryListingDetails {
+		@apply w-2/3;
+	}
+
+	.categoryListingLocation {
+		@apply font-semibold text-xs opacity-80 mb-0;
+	}
+
+	.categoryListingName {
+		@apply font-semibold text-xl m-0;
+	}
+
+	.categoryListingPrice {
+		@apply mt-2 font-semibold text-lg text-teal-400 mb-0 flex items-center;
+	}
+
+	.categoryListingInfoDiv {
+		@apply flex justify-between;
+	}
+
+	.categoryListingInfoText {
+		@apply font-medium text-xs;
+	}
+
+	.loadMore {
+		@apply cursor-pointer w-32 mx-auto text-center py-1 px-2 bg-black text-white font-semibold rounded-2xl opacity-70 mt-8;
+	}
+
+	.listingDetails {
+		@apply mb-40;
+	}
+
+	.shareIconDiv {
+		@apply cursor-pointer fixed top-2 right-2 z-10 bg-white rounded-full w-12 h-12 flex justify-center items-center;
+	}
+
+	.listingName {
+		@apply font-semibold text-2xl mb-2;
+	}
+
+	.listingLocation {
+		@apply mt-0 font-semibold;
+	}
+
+	.discountPrice {
+		@apply py-1 px-2 bg-black text-white rounded-2xl text-xs font-semibold inline;
+	}
+
+	.listingType {
+		@apply py-1 px-2 bg-teal-400 text-white rounded-2xl inline font-semibold text-xs mr-4;
+	}
+
+	.listingDetailsList {
+		@apply p-0 list-none;
+	}
+
+	.listingDetailsList li {
+		@apply my-1 mx-0 font-medium opacity-80;
+	}
+
+	.listingLocationTitle {
+		@apply mt-8 font-semibold text-xl;
+	}
+
+	.leafletContainer {
+		@apply w-full h-48 overflow-x-hidden mb-40 z-50;
+	}
+
+	.linkCopied {
+		@apply fixed top-2 right-16 z-20 bg-white rounded-2xl py-2 px-4 font-semibold;
+	}
+
+	.contactListingName {
+		@apply -mt-4 mb-0 font-semibold;
+	}
+
+	.contactListingLocation {
+		@apply mt-1 font-semibold;
+	}
+
+	.contactLandlord {
+		@apply mt-8 flex items-center;
+	}
+
+	.landlordName {
+		@apply font-semibold text-xl;
+	}
+
+	.messageForm {
+		@apply mt-2;
+	}
+
+	.messageDiv {
+		@apply mt-8 flex flex-col mb-16;
+	}
+
+	.messageLabel {
+		@apply mb-2;
+	}
+
+	.profile {
+		@apply mb-40;
+	}
+
+	.profileHeader {
+		@apply flex justify-center items-center;
+	}
+
+	.logOut {
+		@apply absolute right-2 cursor-pointer text-base font-semibold text-white bg-teal-400 py-1 px-3 rounded-2xl;
+	}
+
+	.profileDetailsheader {
+		@apply flex justify-between;
+	}
+
+	.personalDetailsText {
+		@apply font-semibold;
+	}
+
+	.changePersonalDetails {
+		@apply cursor-pointer text-right font-semibold text-teal-400;
+	}
+
+	.profileCard {
+		@apply bg-white rounded-2xl p-4 shadow-xl;
+	}
+
+	.profileDetails {
+		@apply flex flex-col;
+	}
+
+	.profileName,
+	.profileEmail,
+	.profileAddress,
+	.profileAddressActive,
+	.profileEmailActive,
+	.profileNameActive {
+		@apply my-1 font-semibold w-full;
+	}
+
+	.profileNameActive {
+		@apply bg-gray-300 rounded-lg shadow-sm pl-2;
+	}
+
+	.profileEmail,
+	.profileAddress,
+	.profileAddressActive,
+	.profileEmailActive {
+		@apply font-medium;
+	}
+
+	.profileEmailActive {
+		@apply bg-gray-300 rounded-lg pl-2 shadow-sm;
+	}
+
+	.profileAddressActive {
+		@apply bg-teal-400;
+	}
+
+	.createListing {
+		@apply bg-white rounded-2xl py-1 px-4 shadow-lg mt-8 font-semibold flex justify-between items-center;
+	}
+
+	.listingText {
+		@apply mt-12 font-semibold;
+	}
+
+	.lisitingsList {
+		@apply p-0;
+	}
+
+	.formLabel {
+		@apply font-semibold mt-4 block;
+	}
+
+	.formButtons {
+		@apply flex;
+	}
+
+	.formButton,
+	.formInput,
+	.formInputAddress,
+	.formInputName,
+	.formInputSmall,
+	.formInputFile,
+	.formButtonActive {
+		@apply py-4 px-12 bg-white font-semibold rounded-2xl text-base mt-2 mr-2 flex justify-center items-center;
+	}
+
+	.formButtonActive {
+		@apply bg-teal-400 text-white;
+	}
+
+	.formInputSmall,
+	.formInputFile {
+		@apply mr-12 py-4 px-3 text-center;
+	}
+
+	.formInputName,
+	.formInputAddress {
+		@apply p-4 w-full;
+	}
+
+	.formPriceDiv {
+		@apply flex items-center;
+	}
+
+	.formPriceText {
+		@apply -ml-6 font-semibold;
+	}
+
+	.imagesInfo {
+		@apply text-sm opacity-80;
+	}
+
+	.formInputFile {
+		@apply w-full;
+	}
+
+	.formInputFile::-webkit-file-upload-button {
+		@apply bg-teal-400 border-none text-white font-semibold py-2 px-3 rounded-2xl mr-4;
+	}
+
+	.createListingButton {
+		@apply mt-20;
+	}
+
+	.offers {
+		@apply mb-40;
+	}
+
+	.offerBadge {
+		@apply py-1 px-2 bg-black text-white rounded-2xl ml-4 text-sm opacity-80;
+	}
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
 
 body {
 	font-family: 'Montserrat', sans-serif;
-	background-color: #f2f4f8;
-	margin: 0;
-	box-sizing: border-box;
 }
 
-a {
-	text-decoration: none;
-	display: block;
-	color: #000000;
-}
-
-button {
-	outline: none;
-	border: none;
+.exploreCategoryImg {
+	min-height: 115px;
+	height: 15vw;
 }
 
 .input,
@@ -34,17 +467,9 @@ button {
 .emailInput,
 .nameInput,
 .textarea {
-	box-shadow: rgba(0, 0, 0, 0.11);
-	border: none;
-	background: #ffffff;
-	border-radius: 3rem;
-	height: 3rem;
-	width: 100%;
-	outline: none;
 	font-family: 'Montserrat', sans-serif;
-	padding: 0 3rem;
-	font-size: 1rem;
 }
+
 @media (min-width: 1100px) {
 	.input,
 	.passwordInput,
@@ -55,48 +480,6 @@ button {
 	}
 }
 
-.textarea {
-	padding: 1rem 1.5rem;
-	height: 300px;
-	border-radius: 1rem;
-}
-
-.primaryButton {
-	cursor: pointer;
-	background: #00cc66;
-	border-radius: 1rem;
-	padding: 0.85rem 2rem;
-	color: #ffffff;
-	font-weight: 600;
-	font-size: 1.25rem;
-	width: 80%;
-	margin: 0 auto;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.removeIcon {
-	cursor: pointer;
-	position: absolute;
-	top: -3%;
-	right: -2%;
-}
-.editIcon {
-	cursor: pointer;
-	position: absolute;
-	top: -3.4%;
-	right: 20px;
-}
-
-.pageContainer,
-.offers,
-.profile,
-.listingDetails,
-.category,
-.explore {
-	margin: 1rem;
-}
 @media (min-width: 1024px) {
 	.pageContainer,
 	.offers,
@@ -106,86 +489,6 @@ button {
 	.explore {
 		margin: 3rem;
 	}
-}
-
-.loadingSpinnerContainer {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 5000;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.loadingSpinner {
-	width: 64px;
-	height: 64px;
-	border: 8px solid;
-	border-color: #00cc66 transparent #00cc66 transparent;
-	border-radius: 50%;
-	animation: spin 1.2s linear infinite;
-}
-@keyframes spin {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
-}
-
-.pageHeader {
-	font-size: 2rem;
-	font-weight: 800;
-}
-
-.navbar {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	height: 85px;
-	background-color: #ffffff;
-	z-index: 1000;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.navbarNav {
-	width: 100%;
-	margin-top: 0.75rem;
-	overflow-y: hidden;
-}
-
-.navbarListItems {
-	margin: 0;
-	padding: 0;
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-}
-
-.navbarListItem {
-	cursor: pointer;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.navbarListItemName,
-.navbarListItemNameActive {
-	margin-top: 0.25rem;
-	font-size: 14px;
-	font-weight: 600;
-	color: #8f8f8f;
-}
-.navbarListItemNameActive {
-	color: #2c2c2c;
 }
 
 .nameInput {
@@ -198,45 +501,11 @@ button {
 	background: url('./assets/svg/personIcon.svg') #ffffff 2.5% center no-repeat;
 }
 
-.passwordInputDiv {
-	position: relative;
-}
-
 .passwordInput {
 	margin-bottom: 2rem;
 	background: url('./assets/svg/lockIcon.svg') #ffffff 2.5% center no-repeat;
 }
 
-.showPassword {
-	cursor: pointer;
-	position: absolute;
-	top: -4%;
-	right: 1%;
-	padding: 1rem;
-}
-
-.forgotPasswordLink {
-	cursor: pointer;
-	color: #00cc66;
-	font-weight: 600;
-	text-align: right;
-}
-
-.signInBar,
-.signUpBar {
-	margin-top: 3rem;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	position: inherit;
-}
-
-.signInButton,
-.signUpButton,
-.signInText,
-.signUpText {
-	cursor: pointer;
-}
 @media (min-width: 1024px) {
 	.signInBar,
 	.signUpBar {
@@ -244,60 +513,11 @@ button {
 	}
 }
 
-.signInText,
-.signUpText {
-	font-size: 1.5rem;
-	font-weight: 700;
-}
-
-.signInButton,
-.signUpButton {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 3rem;
-	height: 3rem;
-	background-color: #00cc66;
-	border-radius: 50%;
-}
 @media (min-width: 1024px) {
 	.signInButton,
 	.signUpButton {
 		margin-left: 3rem;
 	}
-}
-
-.socialLogin {
-	margin-top: 4rem;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.socialIconDiv {
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0.75rem;
-	margin: 1.5rem;
-	width: 3rem;
-	height: 3rem;
-	background-color: #ffffff;
-	border-radius: 50%;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-}
-
-.socialIconImg {
-	width: 100%;
-}
-
-.registerLink {
-	margin-top: 4rem;
-	color: #00cc66;
-	font-weight: 600;
-	text-align: center;
-	margin-bottom: 3rem;
 }
 
 @media (min-width: 1217px) {
@@ -311,117 +531,23 @@ button {
 	}
 }
 
-.exploreHeading,
-.exploreCategoryHeading {
-	font-weight: 700;
-}
-
-.exploreCategoryHeading {
-	margin-top: 3rem;
-}
-
 .swiper-container {
 	min-height: 225px;
 	height: 23vw;
 }
 
-.swiper-pagination-bullet-active {
-	background-color: #ffffff !important;
-}
-
-.swiperSlideDiv {
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
-
-.swiperSlideImg {
-	width: 100%;
-	object-fit: cover;
-}
-
-.swiperSlideText {
-	color: #ffffff;
-	position: absolute;
-	top: 70px;
-	left: 0;
-	font-weight: 600;
-	max-width: 90%;
-	font-size: 1.25rem;
-	background-color: rgba(0, 0, 0, 0.8);
-	padding: 0.5rem;
-}
 @media (min-width: 1024px) {
 	.swiperSlideText {
 		font-size: 1.75rem;
 	}
 }
 
-.swiperSlidePrice {
-	color: #000000;
-	position: absolute;
-	top: 143px;
-	left: 11px;
-	font-weight: 600;
-	max-width: 90%;
-	background-color: #ffffff;
-	padding: 0.25rem 0.5rem;
-	border-radius: 1rem;
-}
 @media (min-width: 1024px) {
 	.swiperSlidePrice {
 		font-size: 1.25rem;
 	}
 }
 
-.exploreCategories {
-	display: flex;
-	justify-content: space-between;
-}
-.exploreCategories a {
-	width: 48%;
-}
-
-.exploreCategoryImg {
-	min-height: 115px;
-	height: 15vw;
-	width: 100%;
-	border-radius: 1.5rem;
-	object-fit: cover;
-	margin: 0 auto;
-}
-
-.exploreCategoryName {
-	font-weight: 500;
-	text-align: left;
-}
-
-.category {
-	margin-bottom: 10rem;
-}
-
-.categoryListings {
-	padding: 0;
-}
-
-.categoryListing {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 1rem;
-	position: relative;
-}
-
-.categoryListingLink {
-	display: contents;
-}
-
-.categoryListingImg {
-	width: 30%;
-	height: 100px;
-	border-radius: 1.5rem;
-	object-fit: cover;
-}
 @media (min-width: 1024px) {
 	.categoryListingImg {
 		width: 19%;
@@ -429,325 +555,40 @@ button {
 	}
 }
 
-.categoryListingDetails {
-	width: 65%;
-}
 @media (min-width: 1024px) {
 	.categoryListingDetails {
 		width: 79%;
 	}
 }
 
-.categoryListingLocation {
-	font-weight: 600;
-	font-size: 0.7rem;
-	opacity: 0.8;
-	margin-bottom: 0;
-}
-
-.categoryListingName {
-	font-weight: 600;
-	font-size: 1.25rem;
-	margin: 0;
-}
-
-.categoryListingPrice {
-	margin-top: 0.5rem;
-	font-weight: 600;
-	font-size: 1.1rem;
-	color: #00cc66;
-	margin-bottom: 0;
-	display: flex;
-	align-items: center;
-}
-
 .categoryListingInfoDiv {
-	display: flex;
-	justify-content: space-between;
 	max-width: 275px;
 }
 
-.categoryListingInfoText {
-	font-weight: 500;
-	font-size: 0.7rem;
-}
-
-.loadMore {
-	cursor: pointer;
-	width: 8rem;
-	margin: 0 auto;
-	text-align: center;
-	padding: 0.25rem 0.5rem;
-	background-color: #000000;
-	color: #ffffff;
-	font-weight: 600;
-	border-radius: 1rem;
-	opacity: 0.7;
-	margin-top: 2rem;
-}
-
-.listingDetails {
-	margin-bottom: 10rem;
-}
-
-.shareIconDiv {
-	cursor: pointer;
-	position: fixed;
-	top: 3%;
-	right: 5%;
-	z-index: 2;
-	background-color: #ffffff;
-	border-radius: 50%;
-	width: 3rem;
-	height: 3rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.listingName {
-	font-weight: 600;
-	font-size: 1.5rem;
-	margin-bottom: 0.5rem;
-}
-
-.listingLocation {
-	margin-top: 0;
-	font-weight: 600;
-}
-
-.discountPrice {
-	padding: 0.25rem 0.5rem;
-	background-color: #000000;
-	color: #ffffff;
-	border-radius: 1rem;
-	font-size: 0.8rem;
-	font-weight: 600;
-	display: inline;
-}
-
-.listingType {
-	padding: 0.25rem 0.5rem;
-	background-color: #00cc66;
-	color: #ffffff;
-	border-radius: 2rem;
-	display: inline;
-	font-weight: 600;
-	font-size: 0.8rem;
-	margin-right: 1rem;
-}
-
-.listingDetailsList {
-	padding: 0;
-	list-style-type: none;
-}
-.listingDetailsList li {
-	margin: 0.3rem 0;
-	font-weight: 500;
-	opacity: 0.8;
-}
-
-.listingLocationTitle {
-	margin-top: 2rem;
-	font-weight: 600;
-	font-size: 1.25rem;
-}
-
-.leafletContainer {
-	width: 100%;
-	height: 200px;
-	overflow-x: hidden;
-	margin-bottom: 3rem;
-}
 @media (min-width: 1024px) {
 	.leafletContainer {
 		height: 400px;
 	}
 }
 
-.linkCopied {
-	position: fixed;
-	top: 9%;
-	right: 5%;
-	z-index: 2;
-	background-color: #ffffff;
-	border-radius: 1rem;
-	padding: 0.5rem 1rem;
-	font-weight: 600;
-}
-
-.contactListingName {
-	margin-top: -1rem;
-	margin-bottom: 0;
-	font-weight: 600;
-}
-
-.contactListingLocation {
-	margin-top: 0.25rem;
-	font-weight: 600;
-}
-
-.contactLandlord {
-	margin-top: 2rem;
-	display: flex;
-	align-items: center;
-}
-
-.landlordName {
-	font-weight: 600;
-	font-size: 1.2rem;
-}
-
-.messageForm {
-	margin-top: 0.5rem;
-}
-
-.messageDiv {
-	margin-top: 2rem;
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 4rem;
-}
-
-.messageLabel {
-	margin-bottom: 0.5rem;
-}
-
-.profile {
-	margin-bottom: 10rem;
-}
-
-.profileHeader {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
 .logOut {
-	cursor: pointer;
 	font-family: 'Montserrat', sans-serif;
-	font-size: 1rem;
-	font-weight: 600;
-	color: #ffffff;
-	background-color: #00cc66;
-	padding: 0.25rem 0.75rem;
-	border-radius: 1rem;
 }
 
 .profileDetailsHeader {
-	display: flex;
-	justify-content: space-between;
 	max-width: 500px;
-}
-
-.personalDetailsText {
-	font-weight: 600;
-}
-
-.changePersonalDetails {
-	cursor: pointer;
-	font-weight: 600;
-	color: #00cc66;
 }
 
 .profileCard {
-	background-color: #ffffff;
-	border-radius: 1rem;
-	padding: 1rem;
-	box-shadow: rgba(0, 0, 0, 0.2);
 	max-width: 500px;
-}
-
-.profileDetails {
-	display: flex;
-	flex-direction: column;
-}
-
-.profileName,
-.profileEmail,
-.profileAddress,
-.profileAddressActive,
-.profileEmailActive,
-.profileNameActive {
-	all: unset;
-	margin: 0.3rem 0;
-	font-weight: 600;
-	width: 100%;
-}
-.profileNameActive {
-	background-color: rgba(44, 44, 44, 0.1);
-}
-
-.profileEmail,
-.profileAddress,
-.profileAddressActive,
-.profileEmailActive {
-	font-weight: 500;
-}
-.profileEmailActive {
-	background-color: rgba(44, 44, 44, 0.1);
-}
-
-.profileAddressActive {
-	background-color: rgba(44, 44, 44, 0.1);
 }
 
 .createListing {
-	background-color: #ffffff;
-	border-radius: 1rem;
-	padding: 0.25rem 1rem;
-	box-shadow: rgba(0, 0, 0, 0.2);
-	margin-top: 2rem;
-	font-weight: 600;
 	max-width: 500px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 }
 
-.listingText {
-	margin-top: 3rem;
-	font-weight: 600;
-}
-
-.lisitingsList {
-	padding: 0;
-}
-
-.formLabel {
-	font-weight: 600;
-	margin-top: 1rem;
-	display: block;
-}
-
-.formButtons {
-	display: flex;
-}
-
-.formButton,
-.formInput,
-.formInputAddress,
-.formInputName,
-.formInputSmall,
-.formInputFile,
-.formButtonActive {
-	padding: 0.9rem 3rem;
-	background-color: #ffffff;
-	font-weight: 600;
-	border-radius: 1rem;
-	font-size: 1rem;
-	margin: 0.5rem 0.5rem 0 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.formButtonActive {
-	background-color: #00cc66;
-	color: #ffffff;
-}
-
-.flex {
-	display: flex;
+.formInputName {
+	max-width: 326px;
 }
 
 .formInput,
@@ -759,67 +600,7 @@ button {
 	outline: none;
 	font-family: 'Montserrat', sans-serif;
 }
-.formInputSmall,
-.formInputFile {
-	margin-right: 3rem;
-	padding: 0.9rem 0.7rem;
-	text-align: center;
-}
-
-.formInputName {
-	padding: 0.9rem 1rem;
-	width: 90%;
-	max-width: 326px;
-}
 
 .formInputAddress {
-	padding: 0.9rem 1rem;
-	width: 90%;
 	max-width: 326px;
-}
-
-.formPriceDiv {
-	display: flex;
-	align-items: center;
-}
-
-.formPriceText {
-	margin-left: -1.5rem;
-	font-weight: 600;
-}
-
-.imagesInfo {
-	font-size: 0.9rem;
-	opacity: 0.75;
-}
-
-.formInputFile {
-	width: 100%;
-}
-.formInputFile::-webkit-file-upload-button {
-	background-color: #00cc66;
-	border: none;
-	color: #ffffff;
-	font-weight: 600;
-	padding: 0.5rem 0.75rem;
-	border-radius: 1rem;
-	margin-right: 1rem;
-}
-
-.createListingButton {
-	margin-top: 5rem;
-}
-
-.offers {
-	margin-bottom: 10rem;
-}
-
-.offerBadge {
-	padding: 0.25rem 0.5rem;
-	background-color: #000000;
-	color: #ffffff;
-	border-radius: 1rem;
-	margin-left: 1rem;
-	font-size: 0.8rem;
-	opacity: 0.75;
 }

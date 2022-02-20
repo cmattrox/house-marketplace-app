@@ -7,9 +7,7 @@ const PrivateRoute = () => {
 	const { loggedIn, checkingStatus } = useAuthStatus();
 
 	if (checkingStatus) {
-		setTimeout(() => {
-			return <Spinner />;
-		}, 2000);
+		return <Spinner />;
 	}
 
 	return loggedIn ? <Outlet /> : <Navigate to="/sign-in" />;
